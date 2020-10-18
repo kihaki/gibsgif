@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/search_opened"
+        motion:constraintSetStart="@id/search_closed"
+        motion:duration="300" />
+
+    <ConstraintSet android:id="@+id/search_closed">
+        <Constraint
+            android:id="@+id/search_card"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="?attr/selectableItemBackground"
+            android:elevation="4dp"
+            motion:cardCornerRadius="32dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintHorizontal_bias="1"
+            motion:layout_constraintStart_toStartOf="parent">
+            <CustomAttribute
+                motion:attributeName="radius"
+                motion:customDimension="32dp" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="24dp"
+            android:outlineProvider="none"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            motion:layout_constraintBottom_toBottomOf="@+id/search_card"
+            motion:layout_constraintEnd_toEndOf="@+id/search_card"
+            motion:layout_constraintStart_toStartOf="@+id/search_card"
+            motion:layout_constraintTop_toTopOf="@+id/search_card"
+            motion:srcCompat="@drawable/ic_search_24" />
+        <Constraint
+            android:id="@+id/search_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:elevation="24dp"
+            android:hint="Filter gifs"
+            android:importantForAutofill="no"
+            android:inputType="textAutoComplete"
+            android:outlineProvider="none"
+            android:scrollY="50dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/search_card"
+            motion:layout_constraintEnd_toEndOf="@+id/search_card"
+            motion:layout_constraintStart_toEndOf="@+id/search_icon"
+            motion:layout_constraintTop_toTopOf="@+id/search_card" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/search_opened">
+        <Constraint
+            android:id="@+id/search_card"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="4dp"
+            motion:cardCornerRadius="16dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent">
+            <CustomAttribute
+                motion:attributeName="radius"
+                motion:customDimension="16dp" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:elevation="24dp"
+            android:outlineProvider="none"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            motion:layout_constraintBottom_toBottomOf="@+id/search_card"
+            motion:layout_constraintStart_toStartOf="@+id/search_card"
+            motion:layout_constraintTop_toTopOf="@+id/search_card"
+            motion:srcCompat="@drawable/ic_search_24" />
+        <Constraint
+            android:id="@+id/search_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:elevation="24dp"
+            android:hint="Filter gifs"
+            android:importantForAutofill="no"
+            android:inputType="textAutoComplete"
+            android:outlineProvider="none"
+            android:scrollY="0dp"
+            motion:layout_constraintBottom_toBottomOf="@+id/search_card"
+            motion:layout_constraintEnd_toEndOf="@+id/search_card"
+            motion:layout_constraintStart_toEndOf="@+id/search_icon"
+            motion:layout_constraintTop_toTopOf="@+id/search_card" />
+    </ConstraintSet>
+</MotionScene>

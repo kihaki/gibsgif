@@ -1,0 +1,90 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "kotlin-android-extensions"
+    id "kotlin-kapt"
+    id "org.jetbrains.kotlin.plugin.serialization" version "$kotlin_version"
+}
+
+def gfycatPropertiesFile = rootProject.file("gfycat.properties")
+def gfycatProperties = new Properties()
+gfycatProperties.load(new FileInputStream(gfycatPropertiesFile))
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "de.koandesign.gibsgif"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "GFYCAT_CLIENT_ID", gfycatProperties['GFYCAT_CLIENT_ID'])
+        buildConfigField("String", "GFYCAT_CLIENT_SECRET", gfycatProperties['GFYCAT_CLIENT_SECRET'])
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += [
+                "-Xallow-result-return-type",
+                "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi"
+        ]
+    }
+}
+
+dependencies {
+    def koin_version = "2.2.0-rc-2"
+    def coil_version = "1.0.0-rc3"
+    def nav_version = "2.3.1"
+    def retrofit_version = "2.9.0"
+    def okhttp_version = "4.9.0"
+    def groupie_version = "2.8.1"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.0-M1"
+    implementation "androidx.core:core-ktx:1.3.2"
+    implementation "androidx.activity:activity-ktx:1.2.0-beta01"
+    implementation "androidx.fragment:fragment-ktx:1.3.0-beta01"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "com.google.android.material:material:1.2.1"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.2"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "org.koin:koin-androidx-scope:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    implementation "org.koin:koin-androidx-fragment:$koin_version"
+    implementation "io.coil-kt:coil:$coil_version"
+    implementation "io.coil-kt:coil-gif:$coil_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0"
+    implementation "com.xwray:groupie:$groupie_version"
+    implementation "com.xwray:groupie-kotlin-android-extensions:$groupie_version"
+    implementation "com.jakewharton.timber:timber:4.7.1"
+
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.0-M1"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.0-M1"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+    testImplementation "io.mockk:mockk:1.10.0"
+    testImplementation "org.koin:koin-test:$koin_version"
+    androidTestImplementation "androidx.test.ext:junit:1.1.2"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
+}
